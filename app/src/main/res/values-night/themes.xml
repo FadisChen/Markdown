@@ -1,0 +1,31 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Markdown" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorSurface">@color/dark_surface</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@android:color/black</item>
+        <!-- 文字顏色 -->
+        <item name="android:textColorPrimary">@color/dark_text_primary</item>
+        <item name="android:textColorSecondary">@color/dark_text_secondary</item>
+        <!-- Tab 樣式 -->
+        <item name="tabStyle">@style/CustomTabStyle</item>
+    </style>
+    
+    <style name="CustomTabStyle" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabTextColor">@color/dark_text_secondary</item>
+        <item name="tabSelectedTextColor">@color/primary_light</item>
+        <item name="tabIndicatorColor">@color/primary_light</item>
+        <item name="tabRippleColor">@color/primary</item>
+        <item name="tabBackground">@color/dark_surface</item>
+    </style>
+</resources>

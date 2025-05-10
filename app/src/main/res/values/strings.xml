@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Markdown</string>
+    <string name="markdown_editor_hint">在此輸入您的 Markdown...</string>
+    <string name="tab_edit">編輯</string>
+    <string name="tab_preview">預覽</string>
+    <string name="import_file">匯入</string>
+    <string name="file_import_error">無法匯入檔案</string>
+    <string name="file_import_success">檔案已成功匯入</string>
+    <string name="save_file">存檔</string>
+    <string name="save_success">檔案已成功儲存</string>
+    <string name="save_error">儲存檔案時發生錯誤</string>
+    <string name="dialog_title_save">儲存檔案</string>
+    <string name="dialog_message_filename">請輸入檔案名稱</string>
+    <string name="dialog_button_save">儲存</string>
+    <string name="dialog_button_cancel">取消</string>
+</resources>
