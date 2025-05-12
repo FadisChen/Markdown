@@ -76,9 +76,7 @@ class EditorFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 if (!isUpdatingFromViewModel) {
                     viewModel.updateMarkdownContent(s.toString())
-                    
-                    // 標記內容已變更，顯示存檔按鈕
-                    if (!isContentChanged && s?.isNotEmpty() == true) {
+                    if (!isContentChanged) { // 只有在內容真正從「未變更」變為「已變更」時才更新
                         isContentChanged = true
                         updateSaveButtonVisibility()
                     }
@@ -88,18 +86,18 @@ class EditorFragment : Fragment() {
         
         // 觀察 ViewModel 中的 markdown 內容變化
         viewModel.markdownContent.observe(viewLifecycleOwner) { content ->
-            if (content.isNotEmpty() && editorTextArea.text.toString() != content) {
+            // 檢查是否真的需要更新，避免不必要的setText和游標移動
+            if (editorTextArea.text.toString() != content) {
                 isUpdatingFromViewModel = true
                 editorTextArea.setText(content)
-                // 移動游標到末尾
-                editorTextArea.setSelection(content.length)
+                // 移動游標到開頭並確保捲軸在頂部
+                editorTextArea.setSelection(0)
+                editorTextArea.scrollTo(0, 0)
                 isUpdatingFromViewModel = false
                 
-                // 標記內容已變更，顯示存檔按鈕
-                if (!isContentChanged) {
-                    isContentChanged = true
-                    updateSaveButtonVisibility()
-                }
+                // 從 ViewModel 載入內容後，視為未修改狀態
+                isContentChanged = false
+                updateSaveButtonVisibility()
             }
         }
         
@@ -114,8 +112,15 @@ class EditorFragment : Fragment() {
                 "[Link Example](https://example.com)"
         
         // 只有在 ViewModel 尚未有內容時才設定初始內容
+        // 並且，初始載入不應直接觸發fabSave的顯示
         if (viewModel.markdownContent.value.isNullOrEmpty()) {
+            isUpdatingFromViewModel = true // 防止TextWatcher觸發
             editorTextArea.setText(initialMarkdown)
+            editorTextArea.setSelection(0) // 初始游標在開頭
+            editorTextArea.scrollTo(0,0)   // 初始捲軸在頂部
+            isUpdatingFromViewModel = false
+            isContentChanged = false // 初始內容視為未變更
+            updateSaveButtonVisibility() // 確保fabSave初始為隱藏
         }
     }
     
